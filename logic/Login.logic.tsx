@@ -41,6 +41,7 @@ function LoginLogic() {
         email,
         password,
         redirect: false,
+        callbackUrl: "/",
       });
       if (res?.error) {
         console.log(res.error);

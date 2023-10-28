@@ -12,8 +12,8 @@ function Modal({children}: {children: React.ReactNode}) {
   }
 
   return (
-    <div onClick={closeModal} className='fixed top-0 left-0 z-10 bg-black/50 pt-[10vh] h-screen w-screen'>
-        <section id="modal-div" className='bg-white p-8 rounded-xl w-max mx-auto'>
+    <div onClick={closeModal} className='fixed top-0 left-0 z-10 bg-black/50 pt-[15vh] h-screen w-screen'>
+        <section id="modal-div" className='bg-white p-8 rounded-xl w-max md:min-w-[400px] max-h-[60vh] overflow-y-auto mx-auto'>
           {children}
         </section>
     </div>

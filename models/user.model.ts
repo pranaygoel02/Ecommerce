@@ -1,5 +1,13 @@
 import { Schema, model, models } from "mongoose";
 
+const AddressSchema = new Schema({
+  address: String,
+  city: String,
+  state: String,
+  country: String,
+  pincode: Number,
+});
+
 const UserSchema = new Schema(
   {
     name: String,
@@ -8,6 +16,8 @@ const UserSchema = new Schema(
       required: true,
       unique: true,
     },
+    phone: String,
+    address: [AddressSchema],
     emailVerified: Date,
     image: String,
     hashedPassword: String,
@@ -16,6 +26,7 @@ const UserSchema = new Schema(
     timestamps: true,
   }
 );
+
 
 const User = models.User || model("User", UserSchema);
 

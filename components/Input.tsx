@@ -1,5 +1,3 @@
-"use client"
-
 import React from "react";
 
 interface props {
@@ -24,14 +22,14 @@ const Input : React.FC = ({
     ...rest
 }: props) => {
   return ( show &&
-    <div className="flex flex-col">
-      <label className="text-sm mb-2 text-neutral-500">{rest.label}{required && <span className="text-red-600">*</span>}</label>
+    <div className="flex flex-col gap-1">
+      <label className="text-sm text-neutral-500 font-medium">{rest.label}{required && <span className="text-red-600">*</span>}</label>
       {(
-        <div className={`p-2 px-1 ${leftIcon && 'pl-2'} ${rightIcon && 'pr-2'} border border-neutral-300 focus-within:border-neutral-400 bg-transparent w-full inline-flex items-center rounded-[18px] font-poppins`}>
+        <div className={`p-2 px-1 ${leftIcon && 'pl-2'} ${rightIcon && 'pr-2'} outline outline-2 outline-neutral-300 bg-transparent w-full inline-flex items-center rounded-xl text-sm focus-within:outline-primary`}>
         {leftIcon}
           <input
             {...rest}
-            className="p-2 flex-1 bg-transparent focus-within:outline-none focus-within:border-none disabled:text-neutral-500"
+            className="p-1 flex-1 bg-transparent focus-within:outline-none focus-within:border-none disabled:text-neutral-500"
           />
           {rightIcon}
         </div>

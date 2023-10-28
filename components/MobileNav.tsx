@@ -48,7 +48,7 @@ function MobileNav({ navLinks }: { navLinks: Props[] }) {
       </button>
       {showNav && (
         <div className="fixed inset-0 flex items-start text-white bg-black/50 backdrop-blur-sm z-50 max-h-screen max-w-screen">
-          <nav className="bg-white w-[80%] lg:max-w-[300px] h-screen overflow-auto relative">
+          <nav className="bg-white shadow-2xl w-[80%] lg:max-w-[300px] h-screen overflow-auto relative">
             <UserName />
             {navLinks?.map((props) => (
               <NavLink

@@ -24,6 +24,12 @@ function RegisterLogic() {
       type: "email",
     },
     {
+      label: "Phone Number",
+      placeholder: "Please enter your contact number",
+      name: "phone",
+      type: "tel",
+    },
+    {
       label: "Password",
       placeholder: "Please enter your password",
       name: "password",
@@ -43,8 +49,8 @@ function RegisterLogic() {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     const data = Object.fromEntries(formData);
-    const { name, email, password, c_password } = data;
-    console.log(name, email, password, c_password);
+    const { name, email, phone, password, c_password } = data;
+    console.log(name, email, phone, password, c_password);
     if(password !== c_password) {
       toast.error("Passwords do not match")
       return;
@@ -54,6 +60,7 @@ function RegisterLogic() {
       await axios.post("/api/register", {
         name,
         email,
+        phone,
         password
       })
       toast.success("User registered successfully");
