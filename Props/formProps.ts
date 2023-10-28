@@ -1,5 +1,5 @@
 export interface FormProps {
-    inputs: {
+    inputs?: {
       leftIcon?: React.ReactNode;
       rightIcon?: React.ReactNode;
       show?: boolean;
@@ -15,4 +15,5 @@ export interface FormProps {
     formSubmitFnc?: (e: React.FormEvent<HTMLFormElement>) => void;
     loading: boolean;
     submitBtnText: string;
+    formFields?: any
   }

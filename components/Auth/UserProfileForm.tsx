@@ -1,16 +1,19 @@
 'use client'
 import UserProfileLogic from "@/logic/UserProfile.logic";
 import Form from "../Form";
-import Title from "../Title";
 
 export default function UserProfileForm() {
 
-    const {inputs, loading, updateUserData} = UserProfileLogic();
+    const {loading, formFields} = UserProfileLogic();
 
     return (
-        <>
-        <Title title="Profile" />
-        <Form inputs={inputs} loading={loading} submitBtnText="Update profile" formSubmitFnc={updateUserData}/>
-        </>
+            formFields.map((formField, index) => {
+                return (
+                    <section className="px-2 lg:px-4">
+                    <p className="py-4 text-xl">{formField.legend}</p>
+                    <Form key={index} loading={loading} submitBtnText={formField.submitBtnText} formSubmitFnc={formField.action} inputs={formField.inputs}/>
+                    </section>
+                )
+            })
     )
 }

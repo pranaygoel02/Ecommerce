@@ -1,6 +1,6 @@
 "use client";
 
-import { updateUser } from "@/actions/user";
+import { addNewAddress, updateUser } from "@/actions/user";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
@@ -36,8 +36,75 @@ function UserProfileLogic() {
     },
   ];
 
-  const updateUserData = async (e: React.FormEvent<HTMLFormElement>) => {
+  const addressInputs = [
+    {
+      label: "Address",
+      placeholder: "Please enter your address",
+      name: "address",
+      type: "text",
+    },
+    {
+      label: "City",
+      placeholder: "Please enter your city",
+      name: "city",
+      type: "text",
+    },
+    {
+      label: "State",
+      placeholder: "Please enter your state",
+      name: "state",
+      type: "text",
+    },
+    {
+      label: "Country",
+      placeholder: "Please enter your country",
+      name: "country",
+      type: "text",
+    },
+    {
+      label: "Pin Code",
+      placeholder: "Please enter your zip code",
+      name: "pincode",
+      type: "text"
+    },
+  ]
+
+  const formFields = [
+    {
+      legend: "Personal Information",
+      inputs: inputs,
+      action: updateUserData,
+      submitBtnText: "Update Profile"
+    },
+    {
+      legend: "Address Information",
+      inputs: addressInputs,
+      action: addAddress,
+      submitBtnText: "Add Address"
+    }
+  ]
+
+  async function addAddress (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const data = Object.fromEntries(formData.entries());
+    const { address, city, state, country, pincode } = data;
+    console.log(address, city, state, country, pincode);
+    setLoading(true);
+    try {
+      // write update logic
+      await addNewAddress(session?.user?.email, { data: { address, city, state, country, pincode } });
+      toast.success("Address added successfully");
+    } catch (err: any) {
+      toast.error(err.response.data);
+    } finally {
+      setLoading(false);
+    }  
+  }
+  
+  async function updateUserData (e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    console.log(e.target);
     const formData = new FormData(e.target as HTMLFormElement);
     const data = Object.fromEntries(formData.entries());
     const { name, email, phone } = data;
@@ -61,6 +128,7 @@ function UserProfileLogic() {
     showPass,
     setShowPass,
     updateUserData,
+    formFields
   };
 }
 

@@ -4,10 +4,11 @@ import Button from "./Button";
 import { Suspense } from "react";
 
 function Form({ inputs, formSubmitFnc, submitBtnText, loading, formAction }: FormProps) {
+  
   return (
     <Suspense fallback={<div className="p-4 bg-gray-500 w-full h-12"></div>}>
       <form action={formAction} onSubmit={formSubmitFnc} className="w-full flex flex-col gap-4">
-        {inputs.map((input) => (
+        {inputs && inputs.map((input) => (
           <Input key={input.name} show={true} {...input} />
         ))}
         <Button
@@ -15,7 +16,7 @@ function Form({ inputs, formSubmitFnc, submitBtnText, loading, formAction }: For
           loading={loading}
           type={"submit"}
           text={submitBtnText}
-        />
+          />
       </form>
     </Suspense>
   );

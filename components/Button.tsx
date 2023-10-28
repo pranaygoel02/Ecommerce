@@ -8,7 +8,7 @@ interface ButtonProps {
     type: "button" | "submit" | "reset" | undefined,
     cb?: () => void,
     loading: boolean,
-    style?: string
+    style?: string,
 }
 
 const Button: React.FC<ButtonProps> = ({ text, type, cb, loading, style }) => {
@@ -16,7 +16,7 @@ const Button: React.FC<ButtonProps> = ({ text, type, cb, loading, style }) => {
             <button
                 type={type}
                 disabled={loading}
-                className={`btn btn-primary ${style || 'my-8'}`}
+                className={`btn btn-primary disabled:bg-gray-600 ${style || 'my-8'}`}
                 onClick={cb}
             >
                 { loading ? <AiOutlineLoading className="animate-spin mx-auto"/> : text}
