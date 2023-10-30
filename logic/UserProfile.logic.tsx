@@ -1,7 +1,8 @@
 "use client";
 
-import { addNewAddress, updateUser } from "@/actions/user";
+import { addNewAddress, updateUser, updateUserAddress } from "@/actions/user";
 import { useSession } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 
@@ -10,6 +11,12 @@ function UserProfileLogic() {
 
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const searchParams = useSearchParams();
+  const addressInfo = searchParams.get("address_info");
+  const parent_id = searchParams.get("parent_id");
+  const addr = addressInfo && JSON.parse(addressInfo);
+  console.log(addr, parent_id);  
 
   const inputs = [
     {
@@ -101,6 +108,23 @@ function UserProfileLogic() {
       setLoading(false);
     }  
   }
+
+  async function updateAddress (e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const data = Object.fromEntries(formData.entries());
+    data._id = addr._id;
+    console.log(data);
+    setLoading(true);
+    try {
+      await updateUserAddress(session?.user.email, data );
+      toast.success("Address updated successfully");
+    } catch (err: any) {
+      toast.error(err.response.data);
+    } finally {
+      setLoading(false);
+    }
+  }
   
   async function updateUserData (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -128,7 +152,9 @@ function UserProfileLogic() {
     showPass,
     setShowPass,
     updateUserData,
-    formFields
+    formFields,
+    addr,
+    updateAddress
   };
 }
 

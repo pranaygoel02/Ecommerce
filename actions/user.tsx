@@ -28,16 +28,30 @@ export async function addNewAddress(email: string, data: any) {
   }
 }
 
+export async function updateUserAddress(email: string, update: any) {
+  try {
+    console.log("updating address");
+    console.log(email, update);
+    const { _id } = update;
+    await connectDB();
+    const user = await User.updateOne({email}, { $set: { "address.$[elem]": update } }, { arrayFilters: [{ "elem._id": _id }] });
+    console.log(user);
+    revalidatePath("/account/address");
+  } catch (err) {
+    throw err;
+  }
+}
+
 export async function deleteAddress(formData: FormData) {
   try {
     console.log("deleting address");
     const addr_id = formData.get("addr_id") as string;
-    const parent_id = formData.get("parent_id") as string;
+    const email = formData.get("email") as string;
 
     console.log(addr_id);
     await connectDB();
     const user = await User.updateOne(
-      { _id: parent_id },
+      {email},
       { $pull: { address: { _id: addr_id } } }
     );
     console.log(user);
