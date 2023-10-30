@@ -13,52 +13,37 @@ async function Navbar() {
 
   const navLinks = [
     {
-      name: "Categories 1",
+      name: "Categories",
       subLinks: categories.map((category: string) => ({
         name: category,
         href: `/category/${category}`,
       })),
     },
     {
-      name: "Account 1",
-      href: "/account",
-    },
-    {
-      name: "About 1",
+      name: "Account",
       subLinks: [
         {
-          name: "Categories 2",
-          subLinks: categories.map((category: string) => ({
-            name: category,
-            href: `/category/${category}`,
-          })),
-        },
-        {
-          name: "Account 2",
+          name: "See Profile",
           href: "/account",
         },
         {
-          name: "About 2",
-          subLinks: [
-            {
-              name: "Categories 3",
-              subLinks: categories.map((category: string) => ({
-                name: category,
-                href: `/category/${category}`,
-              })),
-            },
-            {
-              name: "Account 3",
-              href: "/account",
-            },
-            {
-              name: "About 3",
-              href: "/about",
-            },
-          ],
+          name: "Your Cart",
+          href: "/account/cart",
         },
-      ],
-    },
+        {
+          name: "Your Wishlist",
+          href: "/account/wishlist",
+        },
+        {
+          name: "Your Addresses",
+          href: "/account/address",
+        },
+        {
+          name: "Your Orders",
+          href: "/account/orders",
+        }
+      ]
+    }
   ];
 
   return (

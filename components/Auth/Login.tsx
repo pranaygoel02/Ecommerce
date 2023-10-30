@@ -9,7 +9,7 @@ const Login: React.FC = () => {
   const { inputs, loginUser, loading } = LoginLogic();
 
   return (
-    <section className="max-w-[500px] mx-auto">
+    <section className="w-full">
       <AuthHeader
         title={"Sign in to your account"}
         subheader={"Don't have an account?"}

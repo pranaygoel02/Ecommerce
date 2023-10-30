@@ -1,14 +1,16 @@
 import '../globals.css'
 import NextAuthProvider from '@/components/NextAuth/Provider'
 import React from 'react'
+import { Toaster } from 'react-hot-toast'
 
 function layout({children} : {children: React.ReactNode}) {
   return (
 
     <html lang="en">
-      <body className="flex flex-col min-h-screen">
+      <body className="">
           <NextAuthProvider>
-            <main className="flex-1 container">
+            <Toaster/>
+            <main className="flex flex-col items-center justify-center min-h-screen container w-[30vw]">
               {children}
             </main>
           </NextAuthProvider>

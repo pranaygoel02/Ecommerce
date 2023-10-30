@@ -9,7 +9,7 @@ const Signup: React.FC = () => {
   const { inputs, signupUser, loading } = RegisterLogic();
 
   return (
-    <section className="max-w-[500px] mx-auto">
+    <section className="w-full">
       <AuthHeader
         title={"Create a new account"}
         subheader={"Already have an account?"}

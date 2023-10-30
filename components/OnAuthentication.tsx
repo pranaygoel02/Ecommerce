@@ -25,7 +25,7 @@ function OnAuthentication({
   if (isAuthenticated) return <>{children}</>;
 
   return (
-    <section className="flex flex-col items-center text-center justify-center gap-4">
+    <section className="flex flex-col items-center min-h-[80dvh] text-center justify-center gap-4">
       <p className="text-center font-bold text-2xl">This is a protected route</p>
       <p className="text-neutral-600 text-sm">
         You need to be authenticated to access this page

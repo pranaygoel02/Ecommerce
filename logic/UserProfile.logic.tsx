@@ -93,7 +93,7 @@ function UserProfileLogic() {
     setLoading(true);
     try {
       // write update logic
-      await addNewAddress(session?.user?.email, { data: { address, city, state, country, pincode } });
+      await addNewAddress(session?.user?.email, { address, city, state, country, pincode });
       toast.success("Address added successfully");
     } catch (err: any) {
       toast.error(err.response.data);

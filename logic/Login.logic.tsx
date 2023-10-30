@@ -40,11 +40,11 @@ function LoginLogic() {
       const res = await signIn("credentials", {
         email,
         password,
-        redirect: false,
         callbackUrl: "/",
       });
       if (res?.error) {
-        console.log(res.error);
+        console.log('error: ', res.error);
+        toast.error(res.error);
       } else if (res?.ok && !res?.error) {
         toast.success("Logged in successfully");
       }

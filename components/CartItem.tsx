@@ -6,8 +6,7 @@ import { useDispatch } from "react-redux";
 import Rating from "./Rating";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import Link from 'next/link'
-import { FiDelete } from "react-icons/fi";
-import { RiDeleteBackLine, RiDeleteBin2Fill, RiDeleteBinLine } from "react-icons/ri";
+import { RiDeleteBinLine } from "react-icons/ri";
 import formatToCurreny from "@/utils/formatCurrencyPrice";
 
 function CartItem({ item }: {item: CartItemProps}) {

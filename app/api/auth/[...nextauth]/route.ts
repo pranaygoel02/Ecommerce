@@ -25,7 +25,8 @@ const options: AuthOptions = {
           throw new Error("Invalid credentials");
         await connectDB();
         const user = await User.findOne({ email: credentials.email });
-        if (!user || !user?.hashedPassword)
+        if(!user) throw new Error("Email is not registered");
+        if (!user?.hashedPassword)
           throw new Error("Invalid credentials");
         const isValidPassword = await bcrypt.compare(
           credentials.password,

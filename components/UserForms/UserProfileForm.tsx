@@ -7,7 +7,7 @@ export default function UserProfileForm() {
     const {loading, formFields} = UserProfileLogic();
 
     return (
-            formFields.map((formField, index) => {
+            formFields.filter(field => field.legend.includes("Personal")).map((formField, index) => {
                 return (
                     <section className="px-2 lg:px-4">
                     <p className="py-4 text-xl">{formField.legend}</p>

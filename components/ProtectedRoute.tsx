@@ -2,7 +2,8 @@
 
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode } from 'react';
+import Loading from './Loading';
 
 type Props = {
     children: ReactNode;
@@ -12,12 +13,11 @@ const ProtectedRoute = ({ children }: Props) => {
     const session = useSession();
     const router = useRouter();
 
-    useEffect(() => {
-        if (session.status === 'authenticated') {
-            router.back();
-        }
-    }, [session.status]);
+    if(session.status === 'loading') return <Loading/>;
 
+    if (session.status === 'authenticated') {
+        router.back();
+    }
     return children
 
 };

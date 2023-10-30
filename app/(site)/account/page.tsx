@@ -1,9 +1,7 @@
-import UserProfileForm from '@/components/Auth/UserProfileForm'
+import UserProfileForm from "@/components/UserForms/UserProfileForm";
 
 function page() {
-  return (
-        <UserProfileForm />
-  )
+  return <UserProfileForm />;
 }
 
-export default page
+export default page;
