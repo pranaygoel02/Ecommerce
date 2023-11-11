@@ -1,6 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
+import axios from "axios";
 
 export default function OAuth({
   provider,

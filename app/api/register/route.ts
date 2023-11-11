@@ -20,3 +20,17 @@ export async function POST (req: NextRequest) {
         return new NextResponse(err.message.includes('E11000') ? "Email is already registered" : "Something went wrong", { status: 500 });
     }
 } 
+
+export async function GET (req: NextRequest) {
+    try {
+        const body = await req.json();
+        const { email } = body;
+        await connectDB();
+        const user = await User.findOne({ email }, {email : 1});
+        if(user) return new NextResponse(user,{ status: 201 });
+        else return new NextResponse(user, { status: 500 });
+    } catch (err: any) {
+        console.log(err.message);
+        return new NextResponse(err.message.includes('E11000') ? "Email is already registered" : "Something went wrong", { status: 500 });
+    }
+} 

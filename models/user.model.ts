@@ -8,6 +8,14 @@ const AddressSchema = new Schema({
   pincode: Number,
 });
 
+const CartSchema = new Schema({
+  product: {
+    type: Schema.Types.ObjectId,
+    ref: "Product",
+  },
+  quantity: Number
+});
+
 const UserSchema = new Schema(
   {
     name: String,
@@ -21,6 +29,16 @@ const UserSchema = new Schema(
     emailVerified: Date,
     image: String,
     hashedPassword: String,
+    cart: [CartSchema],
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user"
+    },
+    wishlist: [{
+      type: Schema.Types.ObjectId,
+      ref: "Product"
+    }],
   },
   {
     timestamps: true,

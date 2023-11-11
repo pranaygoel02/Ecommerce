@@ -4,10 +4,14 @@ import PasswordIcon from "@/components/Auth/PasswordIcon";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import toast from "react-hot-toast";
+import { useSearchParams } from "next/navigation";
 
 function LoginLogic() {
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const searchParams = useSearchParams();
+  const error = searchParams.get("error");
 
   const inputs = [
     {
@@ -61,6 +65,7 @@ function LoginLogic() {
     showPass,
     setShowPass,
     loginUser,
+    error
   };
 }
 

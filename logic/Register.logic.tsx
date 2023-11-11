@@ -5,10 +5,14 @@ import {AiOutlineEye, AiOutlineEyeInvisible} from 'react-icons/ai'
 import {toast} from "react-hot-toast";
 import axios from "axios";
 import PasswordIcon from "@/components/Auth/PasswordIcon";
+import { useSearchParams } from "next/navigation";
 
 function RegisterLogic() {
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const searchParams = useSearchParams();
+  const error = searchParams.get("error");
   
   const inputs = [
     {
@@ -77,7 +81,8 @@ function RegisterLogic() {
     loading,
     showPass,
     setShowPass,
-    signupUser
+    signupUser,
+    error
   };
 }
 

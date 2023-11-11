@@ -43,6 +43,96 @@ async function Navbar() {
           href: "/account/orders",
         }
       ]
+    },
+    {
+      name: "Admin Panel",
+      subLinks: [
+        {
+          name: "Add Product",
+          href: "/admin/add-product",
+        },
+        {
+          name: "Add Category",
+          href: "/admin/add-category",
+        },
+        {
+          name: "Add Subcategory",
+          href: "/admin/add-subcategory",
+        },
+        {
+          name: "Add Brand",
+          href: "/admin/add-brand",
+        },
+        {
+          name: "Add Coupon",
+          href: "/admin/add-coupon",
+        },
+        {
+          name: "Add Banner",
+          href: "/admin/add-banner",
+        },
+        {
+          name: "Add New Arrivals",
+          href: "/admin/add-new-arrivals",
+        },
+        {
+          name: "Add Trending",
+          href: "/admin/add-trending",
+        },
+        {
+          name: "Add Best Seller",
+          href: "/admin/add-best-seller",
+        },
+        {
+          name: "Add Featured",
+          href: "/admin/add-featured",
+        },
+        {
+          name: "Add Deal of the Day",
+          href: "/admin/add-deal-of-the-day",
+        },
+        {
+          name: "Add Top Rated",
+          href: "/admin/add-top-rated",
+        },
+        {
+          name: "Add Product Review",
+          href: "/admin/add-product-review",
+        },
+        {
+          name: "Add Product Rating",
+          href: "/admin/add-product-rating",
+        },
+        {
+          name: "Add Product Question",
+          href: "/admin/add-product-question",
+        },
+        {
+          name: "Add Product Answer",
+          href: "/admin/add-product-answer",
+        },
+        {
+          name: "Add Product Image",
+          href: "/admin/add-product-image",
+        },
+        {
+          name: "Add Product Video",
+          href: "/admin/add-product-video",
+        },
+        {
+          name: "Add Product Tag",
+          href: "/admin/add-product-tag",
+        },
+        {
+          name: "Add Product Color",
+          href: "/admin/add-product-color",
+        },
+        {
+          name: "Add Product Size",
+          href: "/admin/add-product-size",
+        },
+      ],
+      check: "admin",
     }
   ];
 

@@ -12,17 +12,21 @@ import { NavState } from "@/Props/productProps";
 import { AnyAction, Dispatch } from "redux";
 import UserInfo from "./Auth/UserInfo";
 import UserName from "./UserName";
-import {usePathname} from "next/navigation";
+import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 interface Props {
   name: string;
   href?: string;
   subLinks?: Props[];
+  check?: string;
 }
 
 function MobileNav({ navLinks }: { navLinks: Props[] }) {
-
   const pathname = usePathname();
+  const { data: session } = useSession();
+
+  console.log(session?.user?.role);
 
   useEffect(() => {
     closeNav();
@@ -50,14 +54,16 @@ function MobileNav({ navLinks }: { navLinks: Props[] }) {
         <div className="fixed inset-0 flex items-start text-white bg-black/50 backdrop-blur-sm z-50 max-h-screen max-w-screen">
           <nav className="bg-white shadow-2xl w-[80%] lg:max-w-[300px] h-screen overflow-auto relative">
             <UserName />
-            {navLinks?.map((props) => (
-              <NavLink
-                key={props.name}
-                props={props}
-                activeLinkStack={navStack}
-                dispatch={dispatch}
-              />
-            ))}
+            {navLinks?.map((props) =>
+              props.check === session?.user?.role && (
+                <NavLink
+                  key={props.name}
+                  props={props}
+                  activeLinkStack={navStack}
+                  dispatch={dispatch}
+                />
+              )
+            )}
             <UserInfo />
           </nav>
           <button onClick={closeNav}>

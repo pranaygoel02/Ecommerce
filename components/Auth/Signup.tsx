@@ -4,9 +4,10 @@ import React from "react";
 import AuthHeader from "./AuthHeader";
 import AuthForm from "./AuthForm";
 import RegisterLogic from "@/logic/Register.logic";
+import toast from "react-hot-toast";
 
 const Signup: React.FC = () => {
-  const { inputs, signupUser, loading } = RegisterLogic();
+  const { inputs, signupUser, loading, error } = RegisterLogic();
 
   return (
     <section className="w-full">

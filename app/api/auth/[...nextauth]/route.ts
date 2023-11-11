@@ -25,7 +25,8 @@ const options: AuthOptions = {
           throw new Error("Invalid credentials");
         await connectDB();
         const user = await User.findOne({ email: credentials.email });
-        if(!user) throw new Error("Email is not registered");
+        console.log(user);
+        if(!user) throw new Error("Email is not registered"); // check auto error redirection
         if (!user?.hashedPassword)
           throw new Error("Invalid credentials");
         const isValidPassword = await bcrypt.compare(
@@ -39,6 +40,7 @@ const options: AuthOptions = {
   ],
   pages: {
     signIn: "/signin",
+    error: "/signin",
   },
   debug: process.env.NODE_ENV === "development",
   session: {
@@ -49,6 +51,7 @@ const options: AuthOptions = {
     async jwt({ token, user, trigger, session }) {
       if (user) {
         token.phone = user.phone;
+        token.role = user.role;
       }
       if (trigger === "update") {
         token.name = session.name;
@@ -59,8 +62,28 @@ const options: AuthOptions = {
     async session({ session, token }) {
       if (session?.user) {
         session.user.phone = token.phone;
+        session.user.role = token.role;
       }
       return session;
+    },
+    async signIn({ user, account, profile, credentials }) {
+      console.log('user: ', user, 'account: ', account, 'profile: ', profile);
+      const email = user?.email;
+      const name = user?.name;
+      if(account?.provider === 'google') {
+        await connectDB();
+        const user = await User.findOne({ email });
+        if(!user) {
+          await User.create({
+            email,
+            name,
+            role: 'user',
+            phone: '',
+            hashedPassword: '',
+          });
+        }
+      }
+      return true;
     },
   },
 };
