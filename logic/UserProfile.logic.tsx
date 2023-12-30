@@ -18,6 +18,9 @@ function UserProfileLogic() {
   const addr = addressInfo && JSON.parse(addressInfo);
   console.log(addr, parent_id);  
 
+  console.log(session);
+  
+
   const inputs = [
     {
       label: "Name",

@@ -26,6 +26,7 @@ function MobileNav({ navLinks }: { navLinks: Props[] }) {
   const pathname = usePathname();
   const { data: session } = useSession();
 
+  console.log(session);
   console.log(session?.user?.role);
 
   useEffect(() => {

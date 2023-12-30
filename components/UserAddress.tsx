@@ -14,7 +14,7 @@ async function UserAddress() {
 
   return(
 
-    <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+    <section className="d-grid">
     {address.map((addr: any) => (
       <AddressCard addr={addr} key={addr._id} parent_id={parent_id}/>
       ))}

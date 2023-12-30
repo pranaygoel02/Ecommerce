@@ -8,16 +8,19 @@ import MobileNav from "./MobileNav";
 
 async function Navbar() {
   const { data: categories } = await axios.get(
-    "https://dummyjson.com/products/categories"
+    "http://localhost:3000/api/category"
   );
+
+  console.log(categories);
 
   const navLinks = [
     {
       name: "Categories",
-      subLinks: categories.map((category: string) => ({
-        name: category,
-        href: `/category/${category}`,
+      subLinks: categories.map((category: any) => ({
+        name: category?.name,
+        href: `/category/${category?.name}`,
       })),
+      check: "user",
     },
     {
       name: "Account",
@@ -42,7 +45,8 @@ async function Navbar() {
           name: "Your Orders",
           href: "/account/orders",
         }
-      ]
+      ],
+      check: "user",
     },
     {
       name: "Admin Panel",

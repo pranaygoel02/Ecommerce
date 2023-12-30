@@ -9,7 +9,7 @@ const options: AuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID || "",
-      clientSecret: process.env.GOOGLE_SECRET || "",
+      clientSecret: process.env.GOOGLE_SECRET || "" 
     }),
     CredentialsProvider({
       name: "Credentials",
@@ -20,6 +20,7 @@ const options: AuthOptions = {
       async authorize(
         credentials: Record<"email" | "password", string> | undefined
       ) {
+        console.log('---------------------- AUTHORIZE ----------------------');
         console.log(credentials);
         if (!credentials?.email || !credentials?.password)
           throw new Error("Invalid credentials");
@@ -49,6 +50,8 @@ const options: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async jwt({ token, user, trigger, session }) {
+      console.log('---------------------- JWT ----------------------');
+      console.log('jwt: ', token, 'user: ', user, 'trigger: ', trigger, 'session: ', session);
       if (user) {
         token.phone = user.phone;
         token.role = user.role;
@@ -59,7 +62,9 @@ const options: AuthOptions = {
       }
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token, user }) {
+      console.log('---------------------- SESSION ----------------------');
+      console.log('session: ', session, 'token: ', token, 'user: ', user);
       if (session?.user) {
         session.user.phone = token.phone;
         session.user.role = token.role;
@@ -67,13 +72,14 @@ const options: AuthOptions = {
       return session;
     },
     async signIn({ user, account, profile, credentials }) {
-      console.log('user: ', user, 'account: ', account, 'profile: ', profile);
+      console.log('signing in.......');
       const email = user?.email;
       const name = user?.name;
+      let user_detail;
       if(account?.provider === 'google') {
         await connectDB();
-        const user = await User.findOne({ email });
-        if(!user) {
+        user_detail = await User.findOne({ email });
+        if(!user_detail) {
           await User.create({
             email,
             name,
@@ -83,7 +89,9 @@ const options: AuthOptions = {
           });
         }
       }
-      return true;
+      console.log('user_detail: ', user_detail);
+      console.log('user: ', user);
+      return true
     },
   },
 };
